@@ -4,6 +4,10 @@ No need to write property name as they are created dynamically. Just create sele
 
 When you delete a selector, edit a declaration or make a field blank then css code will be automatically updated. Besides this the active selector name will be shown after the new selector creator text field. Every time you customize a declaration that goes to active selector. So checkout which selector is active below new selector creator text field. 
 
+Firstly all input fields are disabled as no selector is active. To enable them you have to create at least on selector and choose this from dropdown list and press 'modify'.
+
+When you delete any selector all input fields will be disabled again as the same reason that explained previuosly. To enable you must select a selector and press 'modify'.
+
 It is very difficult to find out a property name by scrolling. Don't worry. Just write first one or two letter of the property in the text field that is located at the top-middle of the page. Then the property will be highlighted and come to your visible area.
 
 To make a selector cross browser supported you have to select or write value where -webkit-, -moz- etc. prefix located. Generally they are in collapsible area where they are necessary.
