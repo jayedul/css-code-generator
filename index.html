@@ -1,0 +1,853 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Smart CSS generator</title>
+		<meta charset="utf-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="css/bootstrap.css"/>
+		<link rel="stylesheet" href="css/style.css"/>
+		<script src="js/jquery.js"></script>
+		<script src="js/helper.js"></script>
+		<script src="js/selector.js"></script>
+		<script src="js/initializer.js"></script>
+		<style></style>
+	</head>
+	<body>
+		
+		<div id="config_panel">
+			<div id="drag">
+				<div>
+					<span id="setting_title"></span>
+					<div id="go_to_top">&#8593;</div>
+				</div>
+			</div>
+			<div id="config_container">
+				<div id="menu">
+					
+					<div id="live_css_code">
+<pre>
+generated css code will be shown here
+</pre>
+					</div>
+				</div>
+				
+				<div id="main_container"></div>
+			</div>
+		</div>
+		
+		<div id="declarations">
+			<div>
+				<div>align</div>
+				<div>
+					<span class="toggle">show</span>
+					<div class="extra">
+						<h5>align-content</h5>
+						standard<select name="align-content"></select><br/>
+						-webkit-<select name="-webkit-align-content"></select><br/><br/>
+						
+						
+						<h5>align-self</h5>
+						standard<select name="align-self"></select><br/>
+						-webkit-<select name="-webkit-align-self"></select><br/><br/>
+						
+						<h5>align-items</h5>
+						standard<select name="align-items"></select><br/>
+						-webkit-<select name="-webkit-align-items"></select><br/>
+					</div>
+				</div>
+			</div>
+			<div>
+				<div>animation</div>
+				<div>
+					<span class="toggle">More</span>
+					<input type="text" name="animation" placeholder="standard shorthand"/>
+					<div class="extra">
+						<input type="text" name="-webkit-animation" placeholder="-webkit- shorthand"/><br/>
+						<input type="text" name="-moz-animation" placeholder="-moz- shorthand"/><br/>
+						<input type="text" name="-o-animation" placeholder="-o- shorthand"/><br/><br/>
+						
+						<h5>animation-name</h5>
+						<input type="text" name="animation-name" placeholder="standard"/><br/>
+						<input type="text" name="-webkit-animation-name" placeholder="-webkit-"/><br/>
+						<input type="text" name="-moz-animation-name" placeholder="-moz-"/><br/>
+						<input type="text" name="-o-animation-name" placeholder="-o-"/><br/><br/>
+						
+						<h5>animation-duration</h5>
+						<input type="number" min="0" name="animation-duration" placeholder="standard" data-value_type="s"/><br/>
+						<input type="number" min="0" name="-webkit-animation-duration" placeholder="-webkit-" data-value_type="s"/><br/>
+						<input type="number" min="0" name="-moz-animation-duration" placeholder="-moz-" data-value_type="s"/><br/>
+						<input type="number" min="0" name="-o-animation-duration" placeholder="-o-" data-value_type="s"/><br/><br/>
+						
+						<h5>animation-timing-function</h5>
+						standard<select name="animation-timing-function"></select><br/>
+						-webkit-<select name="-webkit-animation-timing-function"></select><br/>
+						-moz-<select name="-moz-animation-timing-function"></select><br/>
+						-o-<select name="-o-animation-timing-function"></select><br/>
+						
+						<h5>animation-delay</h5>
+						<input type="number" min="0" name="animation-delay" placeholder="standard" data-value_type="s"/><br/>
+						<input type="number" min="0" name="-webkit-animation-delay" placeholder="-webkit-" data-value_type="s"/><br/>
+						<input type="number" min="0" name="-moz-animation-delay" placeholder="-moz-" data-value_type="s"/><br/>
+						<input type="number" min="0" name="-o-animation-delay" placeholder="-o-" data-value_type="s"/><br/><br/>
+						
+						
+						<h5>animation-iteration-count</h5>
+						<input type="number" name="animation-iteration-count" placeholder="standard"/><br/>
+						<input type="number" name="-webkit-animation-iteration-count" placeholder="-webkit-"/><br/>
+						<input type="number" name="-moz-animation-iteration-count" placeholder="-moz-"/><br/>
+						<input type="number" name="-o-animation-iteration-count" placeholder="-o-"/><br/><br/>
+						
+						<h5>animation-direction</h5>
+						standard<select name="animation-direction"></select><br/>
+						-webkit-<select name="-webkit-animation-direction"></select><br/>
+						-moz-<select name="-moz-animation-direction"></select><br/>
+						-o-<select name="-o-animation-direction"></select><br/><br/>
+						
+						
+						<h5>animation-fill-mode</h5>
+						standard<select name="animation-fill-mode"></select><br/>
+						-webkit-<select name="-webkit-animation-fill-mode"></select><br/>
+						-moz-<select name="-moz-animation-fill-mode"></select><br/>
+						-o-<select name="-o-animation-fill-mode"></select><br/><br/>
+						
+						<h5>animation-play-state</h5>
+						standard<select name="animation-play-state"></select><br/>
+						-webkit-<select name="-webkit-animation-play-state"></select><br/>
+						-moz-<select name="-moz-animation-play-state"></select><br/>
+						-o-<select name="-o-animation-play-state"></select><br/><br/>
+					</div>
+				</div>
+			</div>
+			<div>
+				<div>backface-visibility</div>
+				<div>
+					<span class="toggle">-webkit-</span>
+					standard<select name="backface-visibility"></select><br/>
+					<div class="extra">
+						-webkit-<select name="-webkit-backface-visibility"></select><br/>
+					</div>
+				</div>
+			</div>
+			<div>
+				<div>background</div>
+				<div>
+					<span class="toggle">More</span>
+					<input type="text" name="background" placeholder="shorthand"/><button id="more_background">bg++</button>
+					<div class="extra">
+						color<input type="color" name="background-color"/><br/>
+						image<input type="text" name="background-image" placeholder="url('something.extension')"/><br/>
+						position<select name="background-position"></select><br/>
+						repeat<select name="background-repeat"></select><br/>
+						size<select name="background-size"></select><br/>
+						attachment<select name="background-attachment"></select><br/>
+						clip<select name="background-clip"></select><br/>
+						origin<select name="background-origin"></select><br/>
+					</div>
+				</div>
+			</div>
+			<div>
+				<div>border</div>
+				<div>
+					<span class="toggle">More</span>
+					<input type="text" name="border" placeholder='Shorthand'/><br/>
+					<div class="extra">
+						<input type="number" name="border-width" placeholder="border-width" data-value_type="px"/><br/>
+						<input type="number" name="border-left-width" placeholder="left-width" data-value_type="px"/><br/>
+						<input type="number" name="border-right-width" placeholder="right-width" data-value_type="px"/><br/>
+						<input type="number" name="border-top-width" placeholder="top-width" data-value_type="px"/><br/>
+						<input type="number" name="border-bottom-width" placeholder="bottom-width" data-value_type="px"/><br/><br/>
+						
+						style<select name="border-style"></select><br/>
+						left-style<select name="border-left-style"></select><br/>
+						right-style<select name="border-right-style"></select><br/>
+						top-style<select name="border-top-style"></select><br/>
+						bottom-style<select name="border-bottom-style"></select><br/><br/>
+						
+						color<input type="color" name="border-color"/><br/>
+						left-color<input type="color" name="border-left-color"/><br/>
+						right-color<input type="color" name="border-right-color"/><br/>
+						top-color<input type="color" name="border-top-color"/><br/>
+						bottom-color<input type="color" name="border-bottom-color"/><br/><br/>
+						
+						<input type="text" name="border-image" placeholder="image shorthand"/><br/>
+						<input type="text" name="-moz-border-image" placeholder="image -moz- shorthand"/><br/>
+						<input type="text" name="-o-border-image" placeholder="image -o- shorthand"/><br/>
+						<input type="text" name="-webkit-border-image" placeholder="image -webkit- shorthand"/><br/><br/>
+						
+						source<input type="text" name="border-image-source" placeholder="url(image_url)"/><br/>
+						
+						slice<input type="number" name="border-image-slice" placeholder="px" data-value_type="px"/><br/>
+						slice<input type="number" name="border-image-slice" placeholder="%" data-value_type="%"/><br/><br/>
+						
+						outset<input type="number" name="border-image-outset" placeholder="px" data-value_type="px"/><br/>
+						outset<input type="number" name="border-image-outset" placeholder="%" data-value_type="%"/><br/><br/>
+						
+						width<input type="number" name="border-image-width" placeholder="px" data-value_type="px"/><br/>
+						width<input type="number" name="border-image-width" placeholder="%" data-value_type="%"/><br/><br/>
+						
+						repeat<select name="border-image-repeat"></select>
+					</div>
+				</div>
+			</div>
+			<div>
+				<div>border-collapse</div>
+				<div>
+					<select name="border-collapse"></select>
+				</div>
+			</div>
+			<div>
+				<div>border-spacing</div>
+				<div>
+					<span class="toggle">More</span>
+					<input type="number" name="border-spacing" placeholder="px" data-value_type="px"/>
+					<div class="extra">
+						<input type="number" name="border-spacing" placeholder="em" data-value_type="em"/>
+					</div>
+				</div>
+			</div>
+			<div>
+				<div>border-radius</div>
+				<div>
+					<span class="toggle">More</span>
+					<input type="number" min="0" name="border-radius" placeholder="All - px" data-value_type="px"/>
+					
+					<div class="extra">
+						<input type="number" min="0" placeholder="All - %" name="border-radius" data-value_type="%"/><br/><br/>
+						
+						<input type="number" min="0" name="border-top-left-radius" 		placeholder="top left - px" 	data-value_type="px"/><br/>
+						<input type="number" min="0" name="border-top-left-radius" 		placeholder="top left - %" 		data-value_type="%"/><br/><br/>
+						
+						<input type="number" min="0" name="border-top-right-radius" 	placeholder="top right - px" 	data-value_type="px"/><br/>
+						<input type="number" min="0" name="border-top-right-radius" 	placeholder="top right - %" 	data-value_type="%"/><br/><br/>
+						
+						<input type="number" min="0" name="border-bottom-left-radius"  	placeholder="bottom left - px" 	data-value_type="px"/><br/>
+						<input type="number" min="0" name="border-bottom-left-radius"  	placeholder="bottom left - %" 	data-value_type="%"/><br/><br/>
+						
+						<input type="number" min="0" name="border-bottom-right-radius"  placeholder="bottom right - px" data-value_type="px"/><br/>
+						<input type="number" min="0" name="border-bottom-right-radius"	placeholder="bottom right - %" 	data-value_type="%"/><br/>
+					</div>
+				</div>
+			</div>
+			
+			<div>
+				<div>bottom</div>
+				<div>
+					<span class="toggle">More</span>
+					<input type="number" name="bottom" placeholder="px" data-value_type="px"/>
+					<div class="extra">
+						<input type="number" name="bottom" placeholder="%" data-value_type="%"/>
+					</div>
+				</div>
+			</div>
+			<div>
+				<div>box-shadow</div>
+				<div>
+					<span class="toggle">More</span>
+					<input type="text" name="box-shadow" placeholder='Shorthand'/><br/>
+					<div class="extra">
+						<input type="text" name="-webkit-box-shadow" placeholder='-webkit-'/><br/>
+						<input type="text" name="-moz-box-shadow" placeholder='-moz-'/><br/>
+					</div>
+				</div>
+			</div>
+			<div>
+				<div>box-sizing</div>
+				<div>
+					<span class="toggle">More</span>
+					sandard<select name="box-sizing"></select>
+					<div class="extra">
+						-webkit-<select name="-webkit-box-sizing"></select><br/>
+						-moz-<select name="-moz-box-sizing"></select>
+					</div>
+				</div>
+			</div>
+			<div>
+				<div>caption-side</div>
+				<div>
+					<select name="caption-side"></select>
+				</div>
+			</div>
+			<div>
+				<div>clear</div>
+				<div>
+					<select name="clear"></select>
+				</div>
+			</div>
+			<div>
+				<div>color</div>
+				<div>
+					<input type="color" name="color"/><br/>
+				</div>
+			</div>
+			<div>
+				<div>column</div>
+				<div>
+					<span class="toggle">More</span>
+					<input type="text" name="columns" placeholder="shorthand"/>
+					<div class="extra">
+					<input type="text" name="-webkit-columns" placeholder="-webkit-shorthand"/><br/>
+					<input type="text" name="-moz-columns" placeholder="-moz-shorthand"/><br/><br/>
+						column-count<br/>
+						<input type="number" min="1" name="column-count" placeholder="standard"/><br/>
+						<input type="number" min="1" name="-webkit-column-count" placeholder="-webkit-"/><br/>
+						<input type="number" min="1" name="-moz-column-count" placeholder="-moz-"/><br/><br/>
+						
+						column-width<br/>
+						<input type="number" name="column-width" placeholder="standard" data-value_type="px"/><br/>
+						<input type="number" name="-webkit-column-width" placeholder="-webkit-" data-value_type="px"/><br/>
+						<input type="number" name="-moz-column-width" placeholder="-moz-" data-value_type="px"/><br/><br/>
+						
+						colummn-gap<br/>
+						<input type="number" min="1" name="column-gap" placeholder="standard" data-value_type="px"/><br/>
+						<input type="number" min="1" name="-webkit-column-gap" placeholder="-webkit-" data-value_type="px"/><br/>
+						<input type="number" min="1" name="-moz-column-gap" placeholder="-moz-" data-value_type="px"/><br/><br/>
+						
+						column-span<br/>
+						standard<select name="column-span"></select><br/>
+						-webkit-<select name="-webkit-column-span"></select><br/><br/>
+						
+						column-rule<br/>
+						<input type="text" name="column-rule" placeholder="standard - shorthand"/><br/>
+						<input type="text" name="-webkit-column-rule" placeholder="-webkit- shorthand"/><br/>
+						<input type="text" name="-moz-column-rule" placeholder="-moz- shorthand"/><br/><br/>
+						
+						column-rule-color<br/>
+						standard<input type="color" name="column-rule-color"/><br/>
+						-webkit-<input type="color" name="-webkit-column-rule-color"/><br/>
+						-moz-<input type="color" name="-moz-column-rule-color"/><br/><br/>
+						
+						column-rule-style<br/>
+						standard<select name="column-rule-style"></select><br/>
+						-webkit-<select name="-webkit-column-rule-style"></select><br/>
+						-moz-<select name="-moz-column-rule-style"></select><br/><br/>
+						
+						column-rule-width<br/>
+						<input type="number" name="column-rule-width" placeholder="standard" data-value_type="px"/><br/>
+						<input type="number" name="-webkit-column-rule-width" placeholder="-webkit-" data-value_type="px"/><br/>
+						<input type="number" name="-moz-column-rule-width" placeholder="-moz-" data-value_type="px"/><br/>
+						
+					</div>
+				</div>
+			</div>
+			<div>
+				<div>content pseudo</div>
+				<div>
+					<input type="text" name="content"/><br/>
+				</div>
+			</div>
+			<div>
+				<div>counter-reset</div>
+				<div>
+					<span class="toggle">More</span>
+					<input type="text" name="counter-reset" placeholder="counter-reset"/>
+					<div class="extra">
+						<input type="text" name="counter-increment" placeholder="counter-increment"/>
+					</div>
+				</div>
+			</div>
+			<div>
+				<div>cursor</div>
+				<div><select name="cursor"></select></div>
+			</div>
+			<div>
+				<div>direction</div>
+				<div>
+					<select name="direction"></select>
+				</div>
+			</div>
+			<div>
+				<div>display</div>
+				<div>
+					<span class="toggle">-webkit-</span>
+					<select name="display"></select>
+					<div class="extra">
+						<select name="display ">
+							<option value="-webkit-flex">-webkit-flex</option>
+						</select>
+					</div>
+				</div>
+			</div>
+			<div>
+				<div>empty-cells</div>
+				<div>
+					<select name="empty-cells"></select>
+				</div>
+			</div>
+			<div>
+				<div>flex</div>
+				<div>
+					<span class="toggle">Show</span>
+					<div class="extra">
+						<h5>flex (shorthand)</h5>
+						<input type="text" name="flex" placeholder="standard"/><br/>
+						<input type="text" name="-webkit-flex" placeholder="-webkit-"/><br/>
+						<input type="text" name="-moz-flex" placeholder="-moz-"/><br/>
+						<input type="text" name="-ms-flex" placeholder="-ms-"/><br/>
+						
+						<h5>flex-basis</h5>
+						<input type="number" min="0" name="flex-basis" placeholder="standard px" data-value_type="px"/><br/>
+						<input type="number" min="0" name="flex-basis" placeholder="standard %" data-value_type="%"/><br/><br/>
+						
+						<input type="number" min="0" name="-webkit-flex-basis" placeholder="-webkit- px" data-value_type="px"/><br/>
+						<input type="number" min="0" name="-webkit-flex-basis" placeholder="-webkit- %" data-value_type="%"/><br/><br/>
+						
+						<input type="number" min="0" name="-moz-flex-basis" placeholder="-moz- px" data-value_type="px"/><br/>
+						<input type="number" min="0" name="-moz-flex-basis" placeholder="-moz- %" data-value_type="%"/><br/><br/>
+						
+						standard<select name="flex-basis"></select><br/>
+						-webkit-<select name="-webkit-flex-basis"></select><br/>
+						-moz-<select name="-moz-flex-basis"></select>
+						
+						<h5>flex-direction</h5>
+						standard<select name="flex-direction"></select><br/>
+						-webkit-<select name="-webkit-flex-direction"></select><br/>
+						-moz-<select name="-moz-flex-direction"></select>
+						
+						<h5>flex-flow</h5>
+						standard<select name="flex-flow"></select><br/>
+						-webkit-<select name="-webkit-flex-flow"></select><br/>
+						-moz-<select name="-moz-flex-flow"></select>
+						
+						
+						<h5>flex-grow</h5>
+						standard<input type="number" name="flex-grow"/><br/>
+						-webkit-<input type="number" name="-webkit-flex-grow"/><br/>
+						-moz-<input type="number" name="-moz-flex-grow"/>
+						
+						
+						<h5>flex-shrink</h5>
+						standard<input type="number" name="flex-shrink"/><br/>
+						-webkit-<input type="number" name="-webkit-flex-shrink"/><br/>
+						-moz-<input type="number" name="-moz-flex-shrink"/>
+						
+						<h5>flex-wrap</h5>
+						standard<select name="flex-wrap"></select><br/>
+						-webkit-<select name="-webkit-flex-wrap"></select><br/>
+						-moz-<select name="-moz-flex-wrap"></select>
+						
+						
+					</div>
+				</div>
+			</div>
+			<div>
+				<div>float</div>
+				<div>
+					<select name="float"></select>
+				</div>
+			</div>
+			
+			<div>
+				<div>font</div>
+				<div>
+					<span class="toggle">More</span>
+					<input type="text" name="font" placeholder="shorthand"/><br/>
+					
+					<div class="extra">
+						<input type="text" name="font-family" placeholder="Family"/><br/>
+						<input type="text" name="src" placeholder="src"/><br/>
+						<input type="number" name="font-size" placeholder="size - px" data-value_type="px"/><br/>
+						<input type="number" name="font-size" placeholder="size - em" data-value_type="em"/><br/>
+						<input type="number" name="font-size" placeholder="size - %" data-value_type="%"/><br/>
+						<select name="font-style"></select><br/>
+						<select name="font-variant"></select><br/>
+						<select name="font-weight"></select><br/>
+					</div>
+				</div>
+			</div>
+			<div>
+				<div>height</div>
+				<div>
+					<span class="toggle">More</span>
+					<input type="number" name="height" placeholder="px" data-value_type="px"/><br/>
+					
+					<div class="extra">
+						<input type="number" name="height" placeholder="%" data-value_type="%"/><br/>
+						<input type="text" name="height" placeholder="calc(% - px)"/><br/><br/>
+						
+						<input type="number" min="0" name="max-height" placeholder="max-height - px" data-value_type="px"/><br/>
+						<input type="number" min="0" name="max-height" placeholder="max-height - %" data-value_type="%"/><br/>
+						max-height<select name="max-height"><option value="none">none</option><option value="initial">initial</option><option value="inherit">inherit</option></select><br/><br/>
+					
+						<input type="number" min="0" name="min-height" placeholder="min-height - px" data-value_type="px"/><br/>
+						<input type="number" min="0" name="min-height" placeholder="min-height - %" data-value_type="%"/><br/>
+						min-height<select name="min-height"><option value="none">none</option><option value="initial">initial</option><option value="inherit">inherit</option></select><br/><br/>
+					
+					</div>
+				</div>
+			</div>
+			<div>
+				<div>justify-content</div>
+				<div>
+					<span class="toggle">More</span>
+					standard<select name="justify-content"></select><br/>
+					<div class="extra">
+						-webkit-<select name="-webkit-justify-content"></select><br/>
+						-moz-<select name="-moz-justify-content"></select><br/>
+					</div>
+				</div>
+			</div>
+			<div>
+				<div>left</div>
+				<div>
+					<span class="toggle">More</span>
+					<input type="number" name="left" placeholder="px" data-value_type="px"/>
+					<div class="extra">
+						<input type="number" name="left" placeholder="%" data-value_type="%"/>
+					</div>
+				</div>
+			</div>
+			<div>
+				<div>letter-spacing</div>
+				<div>
+					<input type="number" name="letter-spacing" placeholder='px' data-value_type="px"/><br/>
+				</div>
+			</div>
+			<div>
+				<div>line-height</div>
+				<div>
+					<span class="toggle">More</span>
+					<input type="number" name="line-height" placeholder="line number"/><br/>
+					<div class="extra">
+						<input type="number" name="line-height" placeholder="px" data-value_type="px"/><br/>
+						<input type="number" name="line-height" placeholder="%" data-value_type="%"/><br/>
+					</div>
+				</div>
+			</div>
+			<div>
+				<div>list-style</div>
+				<div>
+					<span class="toggle">More</span>
+					<input type="text" name="list-style" placeholder="shorthand"/><br/>
+					
+					<div class="extra">
+						style-type<select name="list-style-type"></select><br/>
+						style-position<select name="list-style-position"></select><br/>
+						style-image<input type="text" name="list-style-image"/><br/>
+					</div>
+				</div>
+			</div>
+			<div>
+				<div>margin</div>
+				<div>
+					<span class="toggle">More</span>
+					<input type="number" name="margin" placeholder="All - px" data-value_type="px"/><br/>
+					
+					<div class="extra">
+						<input type="number" name="margin" placeholder="All - %" data-value_type="%"/><br/><br/>
+						
+						<input type="number" name="margin-left" placeholder="Left - px" data-value_type="px"/><br/>
+						<input type="number" name="margin-left" placeholder="Left - %" data-value_type="%"/><br/><br/>
+						
+						<input type="number" name="margin-right" placeholder="Right - px" data-value_type="px"/><br/>
+						<input type="number" name="margin-right" placeholder="Right - %" data-value_type="%"/><br/><br/>
+						
+						<input type="number" name="margin-bottom" placeholder="bottom - px" data-value_type="px"/><br/>
+						<input type="number" name="margin-bottom" placeholder="bottom - %" data-value_type="%"/><br/><br/>
+						
+						<input type="number" name="margin-top" placeholder="top - px" data-value_type="px"/><br/>
+						<input type="number" name="margin-top" placeholder="top - %" data-value_type="%"/><br/>
+					</div>
+				</div>
+			</div>
+			<div>
+				<div>opacity</div>
+				<div><select name="opacity"></select></div>
+			</div>
+			<div>
+				<div>order</div>
+				<div>
+					<span class="toggle">More</span>
+					<input type="number" min="0" name="order" placeholder="standard"/>
+					<div class="extra">
+						<input type="number" min="0" name="-webkit-order" placeholder="-webkit-"/>
+						<input type="number" min="0" name="-moz-order" placeholder="-moz-"/>
+					</div>
+				</div>
+			</div>
+			
+			<div>
+				<div>outline</div>
+				<div>
+					<span class="toggle">More</span>
+					<input type="text" name="outline" placeholder="shorthand"/>
+					<div class="extra">
+						color<input type="color" name="outline-color"/><br/>
+						style<select name="outline-style"></select><br/>
+						width<input type="number" name="outline-width" placeholder="px" data-value_type="px"/><br/>
+						offset<input type="number" name="outline-offset" placeholder="px" data-value_type="px"/>
+					</div>
+				</div>
+			</div>
+			<div>
+				<div>overflow</div>
+				<div>
+					<span class="toggle">More</span>
+					<select name="overflow"></select>
+					<div class="extra">
+						overflow-x<br/>
+						<select name="overflow-x"></select><br/>
+						overflow-y<br/>
+						<select name="overflow-y"></select><br/>
+					</div>
+				</div>
+			</div>
+			<div>
+				<div>padding</div>
+				<div>
+					<span class="toggle">More</span>
+					<input type="number" name="padding" placeholder="All - px" data-value_type="px"/><br/>
+					
+					<div class="extra">
+						<input type="number" name="padding" placeholder="All - %" data-value_type="%"/><br/><br/>
+						
+						<input type="number" name="padding-left" placeholder="Left - px" data-value_type="px"/><br/>
+						<input type="number" name="padding-left" placeholder="Left - %" data-value_type="%"/><br/><br/>
+						
+						<input type="number" name="padding-right" placeholder="Right - px" data-value_type="px"/><br/>
+						<input type="number" name="padding-right" placeholder="Right - %" data-value_type="%"/><br/><br/>
+						
+						<input type="number" name="padding-bottom" placeholder="bottom - px" data-value_type="px"/><br/>
+						<input type="number" name="padding-bottom" placeholder="bottom - %" data-value_type="%"/><br/><br/>
+						
+						<input type="number" name="padding-top" placeholder="top - px" data-value_type="px"/><br/>
+						<input type="number" name="padding-top" placeholder="top - %" data-value_type="%"/><br/>
+					</div>
+				</div>
+			</div>
+			<div>
+				<div>page-break</div>
+				<div>
+					<span class="toggle">More</span>
+					after<select name="page-break-after"></select><br/>
+					<div class="extra">
+						before<select name="page-break-before"></select><br/>
+						inside<select name="page-break-inside"></select><br/>
+					</div>
+				</div>
+			</div>
+			<div>
+				<div>perspective</div>
+				<div>
+					<span class="toggle">More</span>
+					<input type="number" name="perspective" placeholder="standard" data-value_type="px"/><br/>
+					<div class="extra">
+						<input type="number" name="-webkit-perspective" placeholder="-webkit-"  data-value_type="px"/><br/>
+						<input type="number" name="-moz-perspective" placeholder="-moz-"  data-value_type="px"/><br/><br/>
+						
+						<h5>perspective-origin</h5>
+						<input type="text" name="perspective-origin" placeholder="standard"/><br/>
+						<input type="text" name="-webkit-perspective-origin" placeholder="-webkit-"/><br/>
+						<input type="text" name="-moz-perspective-origin" placeholder="-moz-"/>
+					</div>
+				</div>
+			</div>
+			<div>
+				<div>position</div>
+				<div>
+					<select name="position"></select>
+				</div>
+			</div>
+			
+			<div title="works wwhen overflow specified">
+				<div>resize</div>
+				<div>
+					<select name="resize"></select>
+				</div>
+			</div>
+			<div>
+				<div>right</div>
+				<div>
+					<span class="toggle">More</span>
+					<input type="number" name="right" placeholder="px" data-value_type="px"/>
+					<div class="extra">
+						<input type="number" name="right" placeholder="%" data-value_type="%"/>
+					</div>
+				</div>
+			</div>
+			<div title="IE doesn't support">
+				<div>tab-size</div>
+				<div>
+					<span class="toggle">More</span>
+					<input type="number" min="1" name="tab-size" placeholder="standard"/>
+					<div class="extra">
+						<input type="number" min="1" name="-moz-tab-size" placeholder="-moz-"/>
+						<input type="number" min="1" name="-o-tab-size" placeholder="-o-"/>
+					</div>
+				</div>
+			</div>
+			<div>
+				<div>table-layout</div>
+				<div>
+					<select name="table-layout"></select>
+				</div>
+			</div>
+			<div>
+				<div>text</div>
+				<div>
+					<span class="toggle">More</span>
+					<input type="number" name="text-indent" placeholder="indent - px" data-value_type="px"/>
+					<div class="extra" title="text-align-last not supported in safari and opera">
+						<input type="number" name="text-indent" placeholder="indent - %" data-value_type="%"/><br/>
+						<input type="text" name="text-shadow" placeholder="shadow - shorthand"/><br/>
+						align<select name="text-align"></select><br/>
+						decoration<select name="text-decoration"></select><br/>
+						overflow<select name="text-overflow"></select><br/>
+						transform<select name="text-transform"></select><br/>
+						
+						<h5>text-align-last</h5>
+						standard<select name="text-align-last"></select><br/>
+						-moz-<select name="-moz-text-align-last"></select>
+					</div>
+				</div>
+			</div>
+			<div>
+				<div>top</div>
+				<div>
+					<span class="toggle">More</span>
+					<input type="number" name="top" placeholder="px" data-value_type="px"/>
+					<div class="extra">
+						<input type="number" name="top" placeholder="%" data-value_type="%"/>
+					</div>
+				</div>
+			</div>
+			<div>
+				<div>transform</div>
+				<div>
+					<span class="toggle">Show</span>
+					<div class="extra">
+						<h5>transform</h5>
+						<input type="text" name="transform" placeholder="standard"/><br/>
+						<input type="text" name="-webkit-transform" placeholder="-webkit-"/><br/>
+						<input type="text" name="-moz-transform" placeholder="-moz-"/><br/>
+						<input type="text" name="-ms-transform" placeholder="-ms- (only for 2d)"/><br/>
+						<input type="text" name="-o-transform" placeholder="-o- (only for 2d)"/><br/><br/>
+						
+						<h5>transform-origin</h5>
+						<input type="text" name="transform-origin" placeholder="standard"/><br/>
+						<input type="text" name="-webkit-transform-origin" placeholder="-webkit-"/><br/>
+						<input type="text" name="-moz-transform-origin" placeholder="-moz-"/><br/>
+						<input type="text" name="-ms-transform-origin" placeholder="-ms- (2 value only)"/><br/>
+						<input type="text" name="-o-transform-origin" placeholder="-o- (2 value only)"/><br/><br/>
+						
+						
+						<h5>transform-style</h5>
+						standard<select name="transform-style"></select><br/>
+						-webkit-<select name="-webkit-transform-style"></select><br/>
+						-moz-<select name="-moz-transform-style"></select>
+					</div>
+				</div>
+			</div>
+			<div title="cubic-bezier collected from firefox browser">
+				<div>transition</div>
+				<div>
+					<span class="toggle">More</span>
+					<input type="text" name="transition" placeholder="standard - shorthand"/><br/>
+					<div class="extra">
+						<input type="text" name="-webkit-transition" placeholder="-webkit- shorthand"/><br/>
+						<input type="text" name="-moz-transition" placeholder="-moz- shorthand"/><br/><br/>
+						
+						transition-property<br/>
+						<input type="text" name="transition-property" placeholder="standard"/><br/>
+						<input type="text" name="-webkit-transition-property" placeholder="-webkit-"/><br/>
+						<input type="text" name="-moz-transition-property" placeholder="-moz-"/><br/><br/>
+						
+						transition-duration<br/>
+						<input type="number" min="0" name="transition-duration" placeholder="standard - s" data-value_type="s"/><br/>
+						<input type="number" min="0" name="-webkit-transition-duration" placeholder="-webkit- s" data-value_type="s"/><br/>
+						<input type="number" min="0" name="-moz-transition-duration" placeholder="-moz- s" data-value_type="s"/><br/><br/>
+						
+						transition-delay<br/>
+						<input type="number" min="0" name="transition-delay" placeholder="standard - s" data-value_type="s"/><br/>
+						<input type="number" min="0" name="-webkit-transition-delay" placeholder="-webkit- s" data-value_type="s"/><br/>
+						<input type="number" min="0" name="-moz-transition-delay" placeholder="-moz- s" data-value_type="s"/><br/><br/>
+						
+						transition-timing-function<br/>
+						standard<select name="transition-timing-function"></select><br/>
+						-webkit-<select name="-webkit-transition-timing-function"></select><br/>
+						-moz-<select name="-moz-transition-timing-function"></select>
+					</div>
+				</div>
+			</div>
+			<div>
+				<div>unicode-bidi</div>
+				<div>
+					<select name="unicode-bidi"></select>
+				</div>
+			</div>
+			<div>
+				<div>user-select</div>
+				<div>
+					<span class="toggle">More</span>
+					standard<select name="user-select"></select><br/>
+					<div class="extra">
+						-webkit-<select name="-webkit-user-select"></select><br/>
+						-moz-<select name="-moz-user-select"></select><br/>
+						-ms-<select name="-ms-user-select"></select><br/>
+					</div>
+				</div>
+			</div>
+			<div>
+				<div>vertical-align</div>
+				<div>
+					<select name="vertical-align"></select>
+				</div>
+			</div>
+			<div>
+				<div>visibility</div>
+				<div>
+					<select name="visibility"></select>
+				</div>
+			</div>
+			<div>
+				<div>white-space</div>
+				<div>
+					<select name="white-space"></select>
+				</div>
+			</div>
+			
+			<div>
+				<div>width</div>
+				<div>
+					<span class="toggle">More</span>
+					<input type="number" name="width" placeholder="px" data-value_type="px"/><br/>
+					
+					<div class="extra">
+						<input type="number" name="width" placeholder="%" data-value_type="%"/><br/>
+						<input type="text" name="width" placeholder="calc(% - px)"/><br/><br/>
+						
+						<input type="number" min="0" name="max-width" placeholder="max-width - px" data-value_type="px"/><br/>
+						<input type="number" min="0" name="max-width" placeholder="max-width - %" data-value_type="%"/><br/>
+						max-width<select name="max-width"><option value="none">none</option><option value="initial">initial</option><option value="inherit">inherit</option></select><br/><br/>
+					
+						<input type="number" min="0" name="min-width" placeholder="min-width - px" data-value_type="px"/><br/>
+						<input type="number" min="0" name="min-width" placeholder="min-width - %" data-value_type="%"/><br/>
+						min-width<select name="min-width"><option value="none">none</option><option value="initial">initial</option><option value="inherit">inherit</option></select><br/><br/>
+					
+					</div>
+				</div>
+			</div>
+			<div>
+				<div>word</div>
+				<div>
+					<span class="toggle">More</span>
+						<input type="number" name="word-spacing" placeholder="word-spacing - px" data-value_type="px"/>
+					<div class="extra">
+						<input type="number" name="word-spacing" placeholder="word-spacing - em" data-value_type="em"/><br/>
+						word-break<select name="word-break"></select><br/>
+						word-wrap<select name="word-wrap"></select>
+					</div>
+				</div>
+			</div>
+			<div>
+				<div>z-index</div>
+				<div>
+					<input type="number" max="4099" name="z-index"/>
+				</div>
+			</div>
+		</div>
+		
+		<div id="new_selector">
+			<div>Valid selector including '#' or '.'<input id="selector" type="text" name="selector" value=''/><button id="create_selector_button">Create</button></div>
+		</div>
+	</body>
+</html>
