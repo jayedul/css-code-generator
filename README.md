@@ -13,3 +13,6 @@ It is very difficult to find out a property name by scrolling. Don't worry. Just
 To make a selector cross browser supported you have to select or write value where -webkit-, -moz- etc. prefix located. Generally they are in collapsible area where they are necessary.
 
 Finally you just copy and paste codes in code editor. Thats it.
+
+
+Feel free to notify me if any bug found.
