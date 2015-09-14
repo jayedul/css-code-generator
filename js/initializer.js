@@ -147,11 +147,11 @@ $(document).ready
 			function()
 			{
 				create_selector.new_selector($(this), 'css');
-				el_object.selector_update();
+				create_selector.selector_update();
 			}
 		);
 		
-		el_object.selector_update();
+		create_selector.selector_update();
 				
 		/* ----------show declarations list to modify property---------- */
 		
@@ -177,13 +177,11 @@ $(document).ready
 			{
 				if($(this).parent().find(".extra").css('display')=='none')
 				{
-					$(this).css('color', 'white');
-					$(this).parent().find(".extra").slideDown('fast');
+					$(this).css('color', 'white').parent().find(".extra").slideDown('fast');
 				}
 				else
 				{
-					$(this).css('color', 'gray');
-					$(this).parent().find(".extra").slideUp('fast');
+					$(this).css('color', 'gray').parent().find(".extra").slideUp('fast');
 				}
 			}
 		);
@@ -216,17 +214,14 @@ $(document).ready
 		}
 		
 		/* ---------------------set navigating to property--------------------- */
-		el_object.navigating_to_prop();
+		create_selector.navigating_to_prop();
 					
 		/* -------------------Add highlight when click on an attr------------------- */
-		el=$("#main_container").find("#declaration_in_config").children();
-			
-		el.click
+		$("#main_container").find("#declaration_in_config").children().click
 		(
 			function()
 			{
-				$(this).parent().children().css("background", "");
-				$(this).css("background", "#555566");
+				$(this).changeBackground();
 			}
 		);
 		
