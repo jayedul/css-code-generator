@@ -1,3 +1,9 @@
+$.fn.changeBackground=function(el=null)
+{
+	el?temp=false:el=$(this);
+	el.parent().children().css("background", "");
+	el.css("background", "#555566");
+}
 function get_list(name, config_list)
 {
 	var element=$("select[name='"+name+"']").eq(0);
@@ -33,7 +39,7 @@ function more_background(btn, for_css)
 			{
 				$(new_filed).get(1).oninput=function()
 				{
-					el_object.config_handler($(this));
+					create_selector.config_handler($(this));
 				}
 			}
 		}
