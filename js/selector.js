@@ -1,25 +1,16 @@
-var el_object=
+var create_selector=	
 {
-	
 	navigating_to_prop:function(already_exists)
 	{
 		/* -------------------get element list------------------- */
 		el=$("#main_container").find("#declaration_in_config").children();
 		
 		/* now append an input field where user can write property name to navigate */
-		if(already_exists!==true)
-		{
-			$("#setting_title").append("<span id='go_to' title='Type first one or two letter'>Go To</span>").find("#go_to").append("<input type='text' name='navigate' placeholder='property name'/>");
-		}
+		already_exists!==true?$("#setting_title").append("<span id='go_to' title='Type first one or two letter'>Go To</span>").find("#go_to").append("<input type='text' name='navigate' placeholder='property name'/>"):temp=false;
 		
 		$("#setting_title").find("#go_to").find("input").get(0).oninput=function()
 		{
-			/* what happens when user enter new character */
-			/* firstly remove background color from previuos property name */
-			for(i=0; i<el.length; i++)
-			{
-				el.eq(i).children().eq(0).parent().css("background", "");
-			}
+			
 			/* then search new name */
 			for(i=0; i<el.length; i++)
 			{
@@ -34,7 +25,8 @@ var el_object=
 					
 					scroll_to=ofst-self;
 					$("#config_container").scrollTop(scroll_to);
-					el.eq(i).children().eq(0).parent().get(0).style.background="#555566";
+					
+					$.fn.changeBackground(el.eq(i).children().eq(0).parent());
 					break;
 				}
 			}
@@ -68,7 +60,7 @@ var el_object=
 				function()
 				{
 					create_selector.modify_selector($("#avail_selctor"));
-					el_object.selector_update();
+					create_selector.selector_update();
 					
 					var inp=$("#main_container").find("#declaration_in_config").find("input, select");
 					
@@ -86,7 +78,7 @@ var el_object=
 				{
 					create_selector.delete_selector($("#avail_selctor"));
 					
-					el_object.selector_update();
+					create_selector.selector_update();
 					
 					var inp=$("#main_container").find("#declaration_in_config").find("input, select, button");
 					
@@ -97,18 +89,16 @@ var el_object=
 				}
 			);
 			
-			$("#active_selector_name").html("active selector : "+create_selector.active_selector.selector);
+			$("#active_selector_name").html("<h3 class='text-info'> active selector : "+create_selector.active_selector.selector+"</h3>");
 		}
 		else
 		{
-			$("#opt_cont").html("Not created any selector");
+			$("#opt_cont").html("<span class='bg-warning'>Not created any selector</span>");
 			$("#active_selector_name").html("active selector : "+create_selector.active_selector.selector);
 		}
-	}
-};
+	},
+	
 
-var create_selector=	
-{
 	/* there is a part in this script works perfectly but I can't understand how it works exactly */
 	active_selector:false,
 	
@@ -266,10 +256,10 @@ var create_selector=
 		}
 		
 		/* live css store in style tag in header.  */
-		create_selector.convert_to_css(false, false);
+		create_selector.convert_to_css();
 	},
 	
-	convert_to_css:function(return_value, minify_value)
+	convert_to_css:function()
 	{
 		/* get the whole declaration array */
 		var dcl=create_selector.declaration;
@@ -279,44 +269,21 @@ var create_selector=
 		if(dcl.length>0)
 		{
 			/* now convert the declaration into css (minified and formatted both)  */
-			if(minify_value==true)
+			for(i=0; i<dcl.length; i++)
 			{
-				for(i=0; i<dcl.length; i++)
+				result=result+dcl[i].selector+"\n{";
+				for(n=0; n<dcl[i].property.length; n++)
 				{
-					result=result+dcl[i].selector+"{";
-					for(n=0; n<dcl[i].property.length; n++)
-					{
-						result=result+dcl[i].property[n][0]+":"+dcl[i].property[n][1]+";";
-					}
-					result=result+"}";
+					result=result+dcl[i].property[n][0]+":"+dcl[i].property[n][1]+";\n";
 				}
+				result=result+"}\n\n";
 			}
-			else
-			{
-				for(i=0; i<dcl.length; i++)
-				{
-					result=result+dcl[i].selector+"\n{";
-					for(n=0; n<dcl[i].property.length; n++)
-					{
-						result=result+dcl[i].property[n][0]+":"+dcl[i].property[n][1]+";\n";
-					}
-					result=result+"}\n\n";
-				}
-			}
-			if(return_value==true)
-			{
-				return result;
-			}
-			else
-			{
-				$("#live_css_code").find("pre").html(result);
-				$("style").eq(0).html(result);
-			}
+			
+			$("#live_css_code").find("pre").html(result);
 		}
 		else
 		{
 			$("#live_css_code").find("pre").empty();
-			$("style").eq(0).empty();
 			return false;
 		}
 	},
@@ -361,9 +328,8 @@ var create_selector=
 		}
 		else
 		{
-			select_elem.parent().parent().find('input, select, textarea').prop('disabled', false);
+			select_elem.parent().parent().find('input, select').prop('disabled', false);
 			$("#main_container").find("#more_background").prop('disabled', false);
-			select_elem.parent().html("Now configure<br/>");
 		}
 	},
 	
@@ -382,6 +348,6 @@ var create_selector=
 			}
 		}
 		/* live css store in style tag in header.  */
-		create_selector.convert_to_css(false, false);
+		create_selector.convert_to_css();
 	}
 }
